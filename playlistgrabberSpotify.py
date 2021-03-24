@@ -7,16 +7,16 @@ Created on Mon Mar 22 23:39:20 2021
 import spotipy
 import config
 
-# Create token
+# Create user token
 try:
     clientCredentials = spotipy.oauth2.SpotifyClientCredentials(config.clientId, config.clientSecret)
     token = clientCredentials.get_access_token(as_dict = False)
     # Create Spotipy object
     sp = spotipy.Spotify(token)
 except:
-    print("No Cliend ID or Client Secret Key given or invalid keys.")
+    print("No Client ID or Client Secret Key given or invalid keys.")
     quit()
-# Get playlist ID input
+# Get playlist ID via input
 playlistIdInput = input("Please enter the spotify playlist URL or URI: ")
 
 # Requires playlist id; Returns a list of track items
