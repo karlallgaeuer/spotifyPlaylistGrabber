@@ -15,7 +15,7 @@ try:
     # Create Spotipy object
     sp = spotipy.Spotify(token)
 except:
-    print("No Client ID or Client Secret Key given or invalid keys.")
+    print("No Client ID or Client Secret Key given, invalid keys or there is a problem with the internet connection.")
     sys.exit(1)
 # Get playlist ID via input
 playlistIdInput = input("Please enter the spotify playlist URL or URI: ")
@@ -53,7 +53,7 @@ def getTracklist(allTracks):
     for track in enumerate(allTracks):
         # Get all artist names
         try:
-            # Artist list
+            # Artist list ([1] because of "enumerate")
             artists = track[1]['track']['artists']
             allArtists = ""
             # Get all artists from the artist list
@@ -78,10 +78,10 @@ def getTracklist(allTracks):
         # Write/extend tracklist string
         # First track
         if not tracklist:
-            tracklist = allArtists + " - " + trackname
+            tracklist = str(track[0]+1) + ". " + allArtists + " - " + trackname
         # Further tracks
         elif tracklist:
-            tracklist = tracklist + "\n" + allArtists + " - " + trackname
+            tracklist = tracklist + "\n" + str(track[0]+1) + ". " + allArtists + " - " + trackname
     return tracklist
         
 # Get all playlist tracks
