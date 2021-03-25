@@ -45,6 +45,7 @@ def getPlaylistTracks(playlistId):
 def getTracklist(allTracks):
     # In case the track item list is empty
     if not allTracks:
+        print("No playlist given.")
         return
     # Create tracklist
     # Declare tracklist string
