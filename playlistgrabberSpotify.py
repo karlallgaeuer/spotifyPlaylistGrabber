@@ -4,6 +4,7 @@ Created on Mon Mar 22 23:39:20 2021
 
 @author: Karl
 """
+import sys
 import spotipy
 import config
 
@@ -15,7 +16,7 @@ try:
     sp = spotipy.Spotify(token)
 except:
     print("No Client ID or Client Secret Key given or invalid keys.")
-    quit()
+    sys.exit(1)
 # Get playlist ID via input
 playlistIdInput = input("Please enter the spotify playlist URL or URI: ")
 
@@ -46,43 +47,41 @@ def getTracklist(allTracks):
     if not allTracks:
         return
     # Create tracklist
-    try:
-        # Declare tracklist string
-        tracklist = ""
-        # For every track item in the track item list
-        for track in allTracks:
-            # Get all artist names
-            try:
-                # Artist list
-                artists = track['track']['artists']
-                allArtists = ""
-                # Get all artists from the artist list
-                for artist in artists:
-                    # First artist
-                    if not allArtists:
-                        allArtists = artist['name']
-                    # Further artists
-                    elif allArtists:
-                        allArtists = allArtists + ", " + artist['name']
-            # If artist names can't be found
-            except:
-                allArtists = "ARTIST_ERROR"
-            # Track name
-            try:
-                trackname = track['track']['name']
-            # If track name can't be found
-            except:
-                trackname = "TRACK_ERROR"
-            # Write/extend tracklist string
-            # First track
-            if not tracklist:
-                tracklist = allArtists + " - " + trackname
-            # Further tracks
-            elif tracklist:
-                tracklist = tracklist + "\n" + allArtists + " - " + trackname
-    except:
-        print("Something went wrong with the API-Request or reading of the playlist.")
-        return
+    # Declare tracklist string
+    tracklist = ""
+    # For every track item in the track item list
+    for track in enumerate(allTracks):
+        # Get all artist names
+        try:
+            # Artist list
+            artists = track[1]['track']['artists']
+            allArtists = ""
+            # Get all artists from the artist list
+            for artist in artists:
+                # First artist
+                if not allArtists:
+                    allArtists = artist['name']
+                # Further artists
+                elif allArtists:
+                    allArtists = allArtists + ", " + artist['name']
+        # If artist names can't be found
+        except:
+            allArtists = "ARTIST_ERROR"
+            print("Artist(s) at track " + str(track[0]+1) + " not found.")
+        # Track name
+        try:
+            trackname = track[1]['track']['name']
+        # If track name can't be found
+        except:
+            trackname = "TRACK_ERROR"
+            print("Trackname at track " + str(track[0]+1) + " not found.")
+        # Write/extend tracklist string
+        # First track
+        if not tracklist:
+            tracklist = allArtists + " - " + trackname
+        # Further tracks
+        elif tracklist:
+            tracklist = tracklist + "\n" + allArtists + " - " + trackname
     return tracklist
         
 # Get all playlist tracks
