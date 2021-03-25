@@ -53,13 +53,15 @@ def getTracklist(allTracks):
         for track in allTracks:
             # Get all artist names
             try:
-                # First artist
+                # Artist list
                 artists = track['track']['artists']
                 allArtists = ""
-                # All other artists
+                # Get all artists from the artist list
                 for artist in artists:
+                    # First artist
                     if not allArtists:
                         allArtists = artist['name']
+                    # Further artists
                     elif allArtists:
                         allArtists = allArtists + ", " + artist['name']
             # If artist names can't be found
@@ -72,8 +74,10 @@ def getTracklist(allTracks):
             except:
                 trackname = "TRACK_ERROR"
             # Write/extend tracklist string
+            # First track
             if not tracklist:
                 tracklist = allArtists + " - " + trackname
+            # Further tracks
             elif tracklist:
                 tracklist = tracklist + "\n" + allArtists + " - " + trackname
     except:
