@@ -2,8 +2,8 @@
 ## Installation
 1. Download and install Git
 2. Clone project from Git (https://github.com/karlallgaeuer/spotifyPlaylistGrabber)
-3. Have python installed
-4. Run ```pip install spotipy``` in the command line (this library is required)
+3. Have python installed (3.7.9)
+4. Run ```pip install spotipy``` in the command line (this library is required) (2.17.1)
 
 ## How to use the App
 1. Before using the app you have to get a Spotify Client ID and a Client Secret Key from the Spotify website (https://developer.spotify.com/dashboard/login). 
